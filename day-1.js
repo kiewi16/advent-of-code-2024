@@ -34,17 +34,17 @@ calculateDistances(sortedColumnA, sortedColumnB)
 function countOccurences(sortedColumnA, sortedColumnB) {
     let occurences = []
     sortedColumnA.forEach(columnANum => {
-       let count = sortedColumnB.reduce((acc, columnBNum) => {
+        let count = sortedColumnB.reduce((acc, columnBNum) => {
             if (columnANum === columnBNum) {
                 acc++
             }
-        return acc
+            return acc
         }, 0)
         occurences.push(count)
     })
     let similarityScore = 0
     for (let i = 0; i < sortedColumnA.length; i++) {
-       similarityScore +=  sortedColumnA[i] * occurences[i]
+        similarityScore += sortedColumnA[i] * occurences[i]
     }
     return similarityScore
 }
