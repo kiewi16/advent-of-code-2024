@@ -1,12 +1,16 @@
-// const fs = require('fs');
-// const data = fs.readFileSync('day-02.input.txt', 'utf8')
+const fs = require('fs');
+const data = fs.readFileSync('day-02.input.txt', 'utf8');
+const lines = data.split(/\r?\n/).map(line => line.split(/\s+/))
 
-// const lines = data.split(/\r?\n/).map(line => line.split(/\s+/));
+function convertToIntegers(lines) {
+    return lines.map(line => {
+        return line.map(number => {
+            return parseInt(number)
+        })
+    })
+}
 
-let increasing = [1, 2, 3, 4, 5, 6]
-let decreasing = [6, 5, 4, 3, 2, 1]
-let unsafe = [1, 4, 5, 3, 9]
-let data = [increasing, decreasing, unsafe]
+let integers = convertToIntegers(lines)
 
 function isIncreasing(array) {
     for (let i = 0; i < array.length - 1; i++) {
@@ -26,9 +30,18 @@ function isDecreasing(array) {
     return true
 }
 
+function isDifferent(array) {
+    for (let i = 0; i < array.length - 1; i++) {
+        if (Math.abs(array[i] - array[i + 1]) > 3 || Math.abs(array[i] - array[i + 1]) < 1) {
+            return false
+        }
+    }
+    return true
+}
+
 function confirmSafe(array) {
-    if (isIncreasing(array) || isDecreasing(array)) {
-        return array
+    if ((isIncreasing(array) && isDifferent(array)) || (isDecreasing(array) && isDifferent(array))) {
+        return true
     } else {
         return false
     }
@@ -36,12 +49,15 @@ function confirmSafe(array) {
 
 function checkForSafety(data) {
     let finalArray = []
+    let unsafe = []
     for (let i = 0; i < data.length; i++) {
-       if (confirmSafe(data[i])) {
-        finalArray.push(data[i])
-       }
+        if (confirmSafe(data[i])) {
+            finalArray.push(data[i])
+        } else {
+            unsafe.push(data[i])
+        }
     }
-    return finalArray
+    return finalArray.length
 }
 
-console.log(checkForSafety(data))
+console.log(checkForSafety(integers))
