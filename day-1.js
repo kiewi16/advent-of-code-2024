@@ -48,4 +48,4 @@ function countOccurences(sortedColumnA, sortedColumnB) {
     }
     return similarityScore
 }
-console.log(countOccurences(sortedColumnA, sortedColumnB))
+countOccurences(sortedColumnA, sortedColumnB)
