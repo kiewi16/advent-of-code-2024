@@ -90,7 +90,29 @@ function removeNotIncreasing(array) {
     } 
     return array
 }
+
+function removeNotDecreasing(array) {
+    let count = 0
+    for (let i = 0; i < array.length - 1; i++) {
+        if (array[i] <= array[i + 1]) {
+            count += 1
+        }
+    } 
+    if (count === 1) {
+        for (let i = 0; i < array.length - 1; i++) {
+            if (array[i] <= array[i + 1]) {
+                array.splice(i, 1)
+                break
+            }
+        }
+    } 
+    return array
+}
 console.log("test1:", removeNotIncreasing(test1))
 console.log("test2:", removeNotIncreasing(test2))
 console.log("test6:", removeNotIncreasing(test6))
 console.log("test7:", removeNotIncreasing(test7))
+
+console.log("test3:", removeNotDecreasing(test3))
+console.log("test4:", removeNotDecreasing(test4))
+console.log("test5:", removeNotDecreasing(test5))
