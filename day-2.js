@@ -137,32 +137,32 @@ function checkForSafety(data) {
 // evaluating arrays to determine if their increaseCount or decreaseCount are equivalent to the number of elements in the array (minus 1). This is because you always do one fewer comparison than the length of the array. 
 
 // test cases
-let test1 = [1,2,3,4,5,5] // [1,2,3,4,5]
-let test2 = [1,3,2,5,3,7] // false (more than 1 problem)
-let test3 = [9,8,9,7,5,4,3] // [9,8,7,5,4,3]
-let test4 = [100,90,80,70] // return original array (decreasing)
-let test5 = [999,7,6,5,4] // return original array (decreasing)
-let test6 = [999,1,5,10] // [1,5,10]
-let test7 = [1,3,5,7,9,100] // return original array
-let test8 = [5,4,3,2,1,2] // [5,4,3,2,1]
-let test9 = [1,4,3,2,1] // [4,3,2,1]
-let test10 = [1,2,3,4,5,4] // [1,2,3,4,5]
+let test1 = [1, 2, 3, 4, 5, 5] // [1,2,3,4,5]
+let test2 = [1, 3, 2, 5, 3, 7] // false (more than 1 problem)
+let test3 = [9, 8, 9, 7, 5, 4, 3] // [9,8,7,5,4,3]
+let test4 = [100, 90, 80, 70] // return original array (decreasing)
+let test5 = [999, 7, 6, 5, 4] // return original array (decreasing)
+let test6 = [999, 1, 5, 10] // [1,5,10]
+let test7 = [1, 3, 5, 7, 9, 100] // return original array
+let test8 = [5, 4, 3, 2, 1, 2] // [5,4,3,2,1]
+let test9 = [1, 4, 3, 2, 1] // [4,3,2,1]
+let test10 = [1, 2, 3, 4, 5, 4] // [1,2,3,4,5]
 
 function classifyArray(array) {
     let increaseCount = 0
     let decreaseCount = 0
     let repeatCount = 0
-    
+
     for (let i = 1; i < array.length; i++) {
         if (array[i] > array[i - 1]) {
-            increaseCount ++
+            increaseCount++
         } else if (array[i] < array[i - 1]) {
-            decreaseCount ++
+            decreaseCount++
         } else if (array[i] === array[i - 1]) {
-            repeatCount ++
+            repeatCount++
         }
     }
-    if (increaseCount === (array.length - 1) || decreaseCount === (array.length -1)) {
+    if (increaseCount === (array.length - 1) || decreaseCount === (array.length - 1)) {
         return array
     } else if ((increaseCount > 1 && decreaseCount > 1) || (repeatCount > 1)) {
         return false
@@ -180,7 +180,7 @@ function classifyArray(array) {
         return removeSingleDecrease(array)
     } else if (increaseCount === 1 && decreaseCount > 1) {
         console.log("mostly decreasing with one increase:")
-        // invoke removeSingleIncrease()
+        return removeSingleIncrease(array)
     }
 }
 
@@ -194,47 +194,111 @@ function classifyArray(array) {
 // array.length - 2?? 
 // i starts at 1
 // if array[i] is greater than array[i - 1] && array[i] is greater than array[i + 1]
-    // array[i] = 7
-    // array[i - 1] = 1
-    // array[i + 1] = 3
+// array[i] = 7
+// array[i - 1] = 1
+// array[i + 1] = 3
 // if 7 is GREATER than 1 AND 7 is GREATER than 3
-    // remove 7 
-    // array.splice(array[i], 1)
+// remove 7 
+// array.splice(array[i], 1)
 
 // what if the first element is the one that needs to be removed?? [999, 1, 5, 10]
-// else if array[i - 1] > array[i] && array[i -1] > array[i + 1]
-    // array[i] = 1
-    // array[i - 1] = 999
-    // array[i + 1]= 5
+// else if array[i - 1] > array[i] && array[i - 1] > array[i + 1]
+// array[i] = 1
+// array[i - 1] = 999
+// array[i + 1]= 5
 // else if 999 is GREATER than 1 AND 999 is GREATER than 5
-    // remove array[i - 1]
+// remove array[i - 1]
 
 // what if the last element is the one that needs to be removed?? let test10 = [1,2,3,4,5,4] // [1,2,3,4,5]
 // else if array[i + 1] is less than array[i]
 
-    // array.length = 6
-    // array.length - 2 = 4
-    // round 1: i = 2
-    // round 2: i = 3
-    // round 3: i = 4
-    // round 4: i = 5
+// array.length = 6
+// array.length - 2 = 4
+// round 1: i = 2
+// round 2: i = 3
+// round 3: i = 4
+// round 4: i = 5
 
-    // array[i] = 5
-    // array[i + 1] = 4
-    // remove [i + 1]
+// array[i] = 5
+// array[i + 1] = 4
+// remove [i + 1]
+
+// let test10 = [1, 2, 3, 4, 5, 4] // [1,2,3,4,5]
+// round 1
+    // i = 2
+// round 2
+    // i = 3
+// round 3
+    // i = 4
+// round 4
+    // i = 5
+    // if 5 is GREATER than 4 and 5 is GREATER than 4
+    // remove i
+
+// array[i + 1] > array[i] && array[i] > [array[i] - 1]
 
 function removeSingleDecrease(array) {
     for (let i = 1; i <= array.length - 2; i++) {
-        if(array[i] > array[i - 1] && array[i] > array[i + 1]) {
-            array.splice(array[i], 1)
+        if (array[i] > array[i - 1] && array[i] > array[i + 1]) {
+            console.log("test case 10 doesn't work")
+            let removeIndex = i
+            array.splice(removeIndex, 1)
             break
         } else if (array[i - 1] > array[i] && array[i - 1] > array[i + 1]) {
-            let removeElement = array[i - 1]
-            array.splice(array[removeElement], 1)
+            // let removeElement = array[i - 1]
+            // array.splice(array[removeElement], 1)
+            let removeIndex2 = i - 1
+            array.splice(removeIndex2, 1)
             break
-        } else if (array[i + 1] < array[i]) {
-            let removeElement2 = array[i + 1]
-            array.splice(array[removeElement2], 1)
+        } else if (array[i] > array[i - 1]) {
+            let removeIndex3 = i + 1
+            array.splice(removeIndex3, 1)
+            break
+        }
+    }
+    return array
+}
+
+// let test3 = [9,8,9,7,5,4,3] // 9 needs to be removed from this array so that it is mostly decreasing
+// array[i] = 9
+// array[i - 1] = 8
+// array[i - 2] = 9
+
+// array[i] > array[i - 1] && array[i] >= array[i - 2])
+// 9 is GREATER than 8 and 9 is GREATER than or equal 9
+// remove array[i]
+
+// what if the first element needs to be removed
+// let test9 = [1,4,3,2,1] // [4,3,2,1]
+
+// round 1
+// array[i] = 4
+// array[i + 1] = 3
+// array[i - 1] = 1
+
+// if array[i] is GREATER than array[i - 1] && array[i] is GREATER than array [i + 1]
+// 4 is GREATER than 1 and 4 is GREATER than 3
+// remove array[i]
+
+// what if the last element needs to be removed
+// let test8 = [5,4,3,2,1,2]
+
+// array[i] = 1
+// array[i + 1] = 2
+// array[i - 1] = 2
+
+function removeSingleIncrease(array) {
+    for (let i = 1; i <= array.length - 2; i++) {
+        if (array[i] > array[i - 1] && array[i] >= array[i - 2]) {
+            array.splice(i, 1)
+            break
+        } else if (array[i] > array[i - 1] && array[i] > array[i + 1]) {
+            let removeIndex = i - 1
+            array.splice(removeIndex, 1)
+            break
+        } else if (array[i + 1] > array[i] && array[i] > array[i - 1]) {
+            let removeIndex3 = i + 1
+            array.splice(removeIndex3, 1)
             break
         }
     }
