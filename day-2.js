@@ -202,7 +202,7 @@ function classifyArray(array) {
 // array.splice(array[i], 1)
 
 // what if the first element is the one that needs to be removed?? [999, 1, 5, 10]
-// else if array[i - 1] > array[i] && array[i - 1] > array[i + 1]
+// else if array[i - 1] > array[i] && array[i] > array[i + 1]
 // array[i] = 1
 // array[i - 1] = 999
 // array[i + 1]= 5
@@ -239,8 +239,7 @@ function classifyArray(array) {
 
 function removeSingleDecrease(array) {
     for (let i = 1; i <= array.length - 2; i++) {
-        if (array[i] > array[i - 1] && array[i] > array[i + 1]) {
-            console.log("test case 10 doesn't work")
+        if (array[i] > array[i - 1] && array[i] > array[i + 1] && i < array.length - 2) {
             let removeIndex = i
             array.splice(removeIndex, 1)
             break
@@ -250,7 +249,7 @@ function removeSingleDecrease(array) {
             let removeIndex2 = i - 1
             array.splice(removeIndex2, 1)
             break
-        } else if (array[i] > array[i - 1]) {
+        } else if (array[i] > array[i + 1]) {
             let removeIndex3 = i + 1
             array.splice(removeIndex3, 1)
             break
@@ -289,14 +288,14 @@ function removeSingleDecrease(array) {
 
 function removeSingleIncrease(array) {
     for (let i = 1; i <= array.length - 2; i++) {
-        if (array[i] > array[i - 1] && array[i] >= array[i - 2]) {
+        if (array[i] > array[i - 1] && array[i] >= array[i - 2] && i < array.length - 2) {
             array.splice(i, 1)
             break
         } else if (array[i] > array[i - 1] && array[i] > array[i + 1]) {
             let removeIndex = i - 1
             array.splice(removeIndex, 1)
             break
-        } else if (array[i + 1] > array[i] && array[i] > array[i - 1]) {
+        } else if (array[i + 1] > array[i]) {
             let removeIndex3 = i + 1
             array.splice(removeIndex3, 1)
             break
