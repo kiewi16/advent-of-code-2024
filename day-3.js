@@ -50,11 +50,8 @@ const data = fs.readFileSync('day-03.input.txt', 'utf8');
 // console.log(findNumbersOnly(uncorruptedData))
 
 // part 2
-// let data = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64]don't()(mul(11,8)do()?mul(8,5))don't()*{what();why()&>*mul(353,892)select()why()(mul(648,3)how()don't()<~{mul(771,164)mul(576,453)$why()}-@'mul(967,581)* %{:when()where(){*<"
 // at the beginning of the program instructions are enabled 
     // all code until the first don't() is good
-// look for the first don't and replace all that code
-// then look for the second don't 
 
 // do() enables future mul instructions
 // don't() disables future mul instructions 
@@ -64,12 +61,9 @@ const data = fs.readFileSync('day-03.input.txt', 'utf8');
 const regex = /don't\(\)[\s\S]*?(?=do\(\)|$)/g
 const newData = data.replace(regex, " ")
 
-
 // don't\(\) matches the literal string don't()
-// [\s\S]*?: Non-greedy match for any characters (including newlines), which matches everything between don't() and the first do() (or the end of the string).makes this match non-greedy.
+// [\s\S]*?: matches any character, including newlines, spaces, and special characters. It essentially means "match any character (including line breaks), but do so non-greedily. Since it’s non-greedy (*?), it will stop as soon as it encounters the first do() (or the end of the string, if no do() is present).
 // (?=do\(\)|$): Positive lookahead that ensures the match stops at do() (if found) or the end of the string ($), ensuring that we don't accidentally remove parts after the last don't() if no do() is present.
-
-// finds all occurences of don't() followed by anything up to the first do(), but will only remove everything bettwen (including don't()) and keep the do() intact.
 
 const regex2 = /mul\(\d{1,3},\d{1,3}\)/g
 const uncorruptedData = newData.match(regex2)
