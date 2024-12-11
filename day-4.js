@@ -1,27 +1,27 @@
 const fs = require('fs');
 const data = fs.readFileSync('day-04.input.txt', 'utf8');
 
-// left to right pattern (aka horizontal)
 const word = "XMAS"
 const grid = data.split('\n').map(row => row.split(""))
+const rows = data.split('\n')
 
-function searchHorizontal(word, grid) {
-    for (let row = 0; row < grid.length; row++) {
-        if (grid[row] )
+// left to right pattern (horizontal)
+function searchHorizontal(rows) {
+    let pattern = /XMAS/g
+    let totalMatches = [].flat()
+    for (let row = 0; row < rows.length; row++) {
+        const matches = rows[row].match(pattern)
+        if (matches) {
+            totalMatches.push(matches)
+        }
     }
+    return totalMatches.flat().length
 }
+console.log(searchHorizontal(rows))
 
-// function searchHorizontal(word, grid) {
-//     for (let row = 0; row < grid.length; row++) {
-//         for (let column = 0; column < grid[row].length; column++) {
-            
-//         }
-//     }
-// }
-console.log(searchHorizontal(word, grid))
-
-// right-to-left patten (aka word is backwards)
+// left-to-right pattern (horizontal search) for backwards word 
 // top-to-bottom pattern (vertical search)
+// to-to-bottom pattern (vertical search) for backwards word 
 // diagonal patterns
     // top-left to bottom-right
     // bottom-left to top-right
